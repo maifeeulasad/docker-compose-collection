@@ -6,3 +6,9 @@ list of docker compose file collection to run them easily
 chmod +x podman.sh
 ./podman.sh
 ```
+
+# Getting everything container up and running
+```
+chmod +x ./run-podman-compose-restart.sh
+./run-podman-compose-restart.sh
+```
