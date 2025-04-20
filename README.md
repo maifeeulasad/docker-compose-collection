@@ -12,3 +12,6 @@ chmod +x podman.sh
 chmod +x ./run-podman-compose-restart.sh
 ./run-podman-compose-restart.sh
 ```
+
+# Contribution
+Feel free to add your favourite compose files here. Just raise a PR here.
