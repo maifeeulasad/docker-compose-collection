@@ -1,0 +1,30 @@
+#!/bin/bash
+
+# Description: Recursively search up to 3 levels deep for docker-compose.yml files
+#              and run podman-compose down && up -d in each.
+
+# Save the current directory
+BASE_DIR=$(pwd)
+
+echo "Working in: $BASE_DIR"
+
+# Find docker-compose.yml files up to 3 directories deep
+find . -maxdepth 3 -type f -name "docker-compose.yaml" | while read compose_file; do
+    dir=$(dirname "$compose_file")
+    echo "🔍 Found: $compose_file"
+    echo "➡️  Running podman-compose in: $dir"
+    
+    cd "$dir" || continue
+
+    echo "🛑 Stopping existing services..."
+    podman-compose down
+
+    echo "🚀 Starting services..."
+    podman-compose up -d
+
+    echo "✅ Done with: $dir"
+    echo "-----------------------------"
+
+    # Return to base dir for next iteration
+    cd "$BASE_DIR" || exit 1
+done
