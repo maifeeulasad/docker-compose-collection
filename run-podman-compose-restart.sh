@@ -9,7 +9,7 @@ BASE_DIR=$(pwd)
 echo "Working in: $BASE_DIR"
 
 # Find docker-compose.yml files up to 3 directories deep
-find . -maxdepth 3 -type f -name "docker-compose.yaml" | while read compose_file; do
+find . -maxdepth 3 -type f \( -name "compose.yml" -o -name "docker-compose.yml" -o -name "container-compose.yml" -o -name "compose.yaml" -o -name "docker-compose.yaml" -o -name "container-compose.yaml" \) | while read compose_file; do
     dir=$(dirname "$compose_file")
     echo "🔍 Found: $compose_file"
     echo "➡️  Running podman-compose in: $dir"
